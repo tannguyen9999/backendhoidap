@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import route from './route';
 import cors from 'cors';
 import config from './conflig/index';
+const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -25,8 +26,8 @@ app.use(cors());
 app.use('/',route);
 
 
-app.listen(8080, function () {
-  console.log('listening to port 8080...');
+app.listen(port, function () {
+  console.log('listening to port 3000...');
 });
 
 export default app;

@@ -8,18 +8,16 @@ import config from './conflig/index';
 const port = process.env.PORT || 3000;
 
 const app = express();
-
-mongoose.connect(
-  config.mongo.url,
-  (err) => {
-    if (err) {
-      console.log(err);
-      process.exit(0);
-    } else {
-      console.log('connect mongodb success');
-    }
-  }
-);
+const uri = process.env.MONGO_URL;
+mongoose
+  .connect(uri, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  })
+  .then(() => console.log("DB Connected!"))
+  .catch((err) => {
+    console.log(`DB Connection Error: ${err.message}`);
+  });
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());

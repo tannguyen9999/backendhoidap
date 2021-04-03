@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import route from './route';
 import cors from 'cors';
 import config from './conflig/index';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const app = express();
 const uri = process.env.MONGO_URL;

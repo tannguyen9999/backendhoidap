@@ -1,7 +1,8 @@
 import crypto from '../utils/crypto';
 import authenticator from '../utils/authenticator';
 import * as userService from '../service/userr.service'
-
+const { cloudinary } = require('../utils/cloudinary');
+const fs = require('fs');
 
 
 export async function register(req, res) {
@@ -19,6 +20,23 @@ export async function register(req, res) {
     return res.json({ user, success: true });
 }
 
+export async function upload(req, res) {
+    let img = fs.readFileSync(req.file.path);
+    let fileStr = img.toString('base64');
+    let headerFile = "data:image/jpeg;base64,"
+    const data = headerFile + fileStr
+    let url = '';
+    try {
+        const uploadResponse = await cloudinary.uploader.upload(data, {
+            upload_preset: 'dev_setups',
+        });
+        url = uploadResponse.url
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ err: 'Something went wrong' });
+    }
+    return res.json({ success: true,url });
+}
 
 
 export async function verifyToken(req, res) {

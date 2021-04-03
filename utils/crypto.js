@@ -8,6 +8,7 @@ const hash = (text) => {
 };
 
 const verify = (text, hashed) => {
+    console.log(text);
     return hashed === hash(text);
 };
 

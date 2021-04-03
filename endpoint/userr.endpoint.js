@@ -44,7 +44,7 @@ export async function changePassword(req, res) {
     let id = user._id;
     
     try {
-        user = await userService.updatePassword({id, password:newPassword});
+        user = await userService.updatePassword(id,newPassword);
     } catch (error) {
         return res.status(400).json({ success: false, message: error.message });
     }
@@ -64,7 +64,7 @@ export async function updateAvatar(req, res) {
             upload_preset: 'dev_setups',
         });
         url = uploadResponse.url
-        user = await userService.updateAvatar({id,url});
+        user = await userService.updateAvatar(id,url);
     } catch (error) {
         return res.status(400).json({ success: false, message: error.message });
     }

@@ -11,7 +11,7 @@ const router = express.Router();
 
 
 router.post(
-    '/postt',
+    '/',
     syncMiddleware(authenticate),
     syncMiddleware(validatorBody(postValidation.postDataSchema)),
     syncMiddleware(postEndpoint.postData)
@@ -21,6 +21,11 @@ router.get(
     '/',
     syncMiddleware(validatorBody(postValidation.getDataSchema)),
     syncMiddleware(postEndpoint.findPosts)
+);
+
+router.get(
+    '/sitemap',
+    syncMiddleware(postEndpoint.findPostsToSiteMap)
 );
 
 router.get(

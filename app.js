@@ -21,12 +21,14 @@ mongoose
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
-app.use('/',route);
+app.use('/api',route);
+app.use('/api/auth/updateAvatar', express.static('uploads'));
 app.use('/api/auth/upload', express.static('uploads'));
 
 
+
 app.listen(port, function () {
-  console.log('listening to port 3000...');
+  console.log(`listening to port ${port}...`);
 });
 
 export default app;

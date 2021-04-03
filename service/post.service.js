@@ -46,4 +46,9 @@ export async function findAllPost(limit, offset) {
     return posts;
 }
 
-
+export async function findAllPostToSiteMap(limit, offset) {
+    let posts = await Post.find({})
+        .lean()
+        .sort({ createdAt: -1 });
+    return posts;
+}

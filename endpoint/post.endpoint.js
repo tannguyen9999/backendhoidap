@@ -94,3 +94,14 @@ export async function findPostsOfme(req, res) {
     }
     return res.json({ posts, success: true,limit,offset });
 }
+
+
+export async function findPostsToSiteMap(req, res) {
+    let posts;
+    try {
+        posts = await postService.findAllPostToSiteMap()
+    } catch (error) {
+        return res.status(400).json({ success: false, message: error.message });
+    }
+    return res.json({ posts, success: true });
+}

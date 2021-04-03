@@ -8,10 +8,12 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
      
      name: { type: String, required: true },
+     avatar: { type: String,default:'' },
      email: { type: String,required: true,unique: true },
      password: { type: String,required: true},
      sex: { type: String,default:'Nam'},
      birthDay: { type: Date},
+     lisPost: { type: Array},
      startDay:{
           type: Date,
           required: true,

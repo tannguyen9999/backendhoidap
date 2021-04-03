@@ -18,7 +18,27 @@ router.post(
 );
 
 router.post(
+    '/login',
+    syncMiddleware(validatorBody(userValidation.loginSchema)),
+    syncMiddleware(authEndpoint.login)
+);
+router.put(
+    '/change-password',
+    syncMiddleware(authenticate),
+    syncMiddleware(validatorBody(userValidation.changePasswordSchema)),
+    syncMiddleware(authEndpoint.changePassword)
+);
+
+router.put(
+    '/updateAvatar',
+    syncMiddleware(authenticate),
+    syncMiddleware(multer.single("avatar")),
+    syncMiddleware(authEndpoint.updateAvatar)
+);
+
+router.post(
     '/upload',
+    syncMiddleware(authenticate),
     syncMiddleware(multer.single("picture")),
     syncMiddleware(authEndpoint.upload)
 );

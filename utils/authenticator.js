@@ -4,7 +4,7 @@ import jwt  from 'jsonwebtoken';
 const secretKey = "heo";
 
 const jwtOptions = {
-    expiresIn: '1h'
+    expiresIn: '365d'
 };
 
 module.exports = {

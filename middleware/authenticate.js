@@ -1,4 +1,4 @@
-import User from '../models/user.model';
+import User from '../models/userr.model';
 import authenticator from '../utils/authenticator';
 
 export async function authenticate(req, res, next) {

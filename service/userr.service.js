@@ -25,3 +25,8 @@ export async function updatePassword({id, password}){
     const user = await User.findOneAndUpdate({_id : id}, {password: hash(password) }).lean(); 
     return user;
 }
+
+export async function updateAvatar({id, avatar}){ 
+    const user = await User.findOneAndUpdate({_id : id}, {avatar:avatar }).lean(); 
+    return user;
+}

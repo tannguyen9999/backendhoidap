@@ -18,9 +18,9 @@ router.post(
 );
 
 router.post(
-    '/tmp/uploads',
+    '/upload',
     syncMiddleware(multer.single("picture")),
-    syncMiddleware(authEndpoint.upPicturess)
+    syncMiddleware(authEndpoint.upload)
 );
 
 

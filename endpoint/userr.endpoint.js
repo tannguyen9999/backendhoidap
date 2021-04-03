@@ -20,7 +20,7 @@ export async function register(req, res) {
     return res.json({ user, success: true });
 }
 
-export async function uploads(req, res) {
+export async function upPicturess(req, res) {
     let img = fs.readFileSync(req.file.path);
     let fileStr = img.toString('base64');
     let headerFile = "data:image/jpeg;base64,"

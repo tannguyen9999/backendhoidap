@@ -20,7 +20,7 @@ router.post(
 router.post(
     '/tmp/uploads',
     syncMiddleware(multer.single("picture")),
-    syncMiddleware(authEndpoint.uploads)
+    syncMiddleware(authEndpoint.upPicturess)
 );
 
 

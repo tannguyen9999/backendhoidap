@@ -35,6 +35,12 @@ router.get(
     syncMiddleware(postEndpoint.findPostsOfme)
 );
 
+router.get(
+    '/option',
+    syncMiddleware(validatorBody(postValidation.getDataSByOptionchema)),
+    syncMiddleware(postEndpoint.findPostsByOption)
+);
+
 
 router.get(
     '/class',

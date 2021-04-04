@@ -6,11 +6,19 @@ import JoiObjectId from 'joi-objectid';
 
 const postDataSchema = Joi.object().keys({
     class: Joi.string().strip().required(),
+    subject:Joi.string().strip().required(),
     content: Joi.string().strip().required(),
     picture: Joi.string().strip(),
 });
 const getDataSByClasschema = Joi.object().keys({
     class: Joi.string().strip().required(),
+    offset: Joi.string().strip(),
+    limit: Joi.string().strip(),
+});
+
+const getDataSByOptionchema = Joi.object().keys({
+    class: Joi.string().strip(),
+    subject:Joi.string().strip(),
     offset: Joi.string().strip(),
     limit: Joi.string().strip(),
 });
@@ -24,5 +32,6 @@ const getDataSchema = Joi.object().keys({
 module.exports = {
     postDataSchema,
     getDataSByClasschema,
-    getDataSchema
+    getDataSchema,
+    getDataSByOptionchema
 }; 

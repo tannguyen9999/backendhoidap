@@ -13,6 +13,7 @@ const postSchema = new Schema({
           required: true
      },
      class: { type: String,required: true },
+     subject: { type: String,required: true },
      content: { type: String,required: true},
      picture:{type: String,default:''},
      startDay:{

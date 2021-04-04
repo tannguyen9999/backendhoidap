@@ -105,3 +105,43 @@ export async function findPostsToSiteMap(req, res) {
     }
     return res.json({ posts, success: true });
 }
+
+export async function findPostsByOption(req, res) {
+    let data = req.body;
+    const classs = data.class;
+    let {offset,limit,subject} = data;
+    if(!offset){
+        offset = 0;
+    }
+    if(!limit){
+        limit= 10;
+    }
+    let option;
+    if(classs && subject){
+        option={
+            class:classs,
+            subject:subject
+        }
+    }
+
+    if(!classs && subject){
+        option={
+            subject:subject
+        }
+    }
+
+    if(classs && !subject){
+        option={
+            class:classs
+        }
+    }
+    let posts;
+    try {
+        limit = parseInt(limit);
+        offset = parseInt(offset);
+        posts = await postService.findByOption(limit,offset,option)
+    } catch (error) {
+        return res.status(400).json({ success: false, message: error.message });
+    }
+    return res.json({ posts, success: true,limit,offset });
+}

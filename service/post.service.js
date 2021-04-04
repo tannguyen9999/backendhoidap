@@ -24,6 +24,16 @@ export async function findByClass(limit, offset,classs) {
     return posts;
 }
 
+export async function findByOption(limit, offset,option) {
+    let posts = await Post.find(option)
+        .lean()
+        .limit(limit)
+        .skip(offset)
+        .populate('userId')
+        .sort({ createdAt: -1 });
+    return posts;
+}
+
 export async function findOfme(limit, offset,userId) {
     let posts = await Post.find({
         userId:userId

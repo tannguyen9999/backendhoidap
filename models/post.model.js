@@ -14,7 +14,7 @@ const postSchema = new Schema({
      },
      class: { type: String,required: true },
      content: { type: String,required: true},
-     picture:{type: String},
+     picture:{type: String,default:''},
      startDay:{
           type: Date,
           required: true,

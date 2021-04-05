@@ -18,8 +18,7 @@ router.post(
 );
 
 router.get(
-    '/',
-    syncMiddleware(validatorBody(commentValidation.getDataByPostIdSchema)),
+    '/:postId/',
     syncMiddleware(commentEndpoint.getDataByPostId)
 );
 

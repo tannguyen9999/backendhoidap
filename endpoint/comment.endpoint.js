@@ -20,8 +20,9 @@ export async function postData(req, res) {
 }
 
 export async function getDataByPostId(req, res) {
-    let data = req.body;
-    const {postId} = data;
+    let {
+        postId
+    } = req.params;
     let comments;
     try {
         comments = await commentService.findByPostId(postId)

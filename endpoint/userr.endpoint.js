@@ -68,7 +68,7 @@ export async function updateAvatar(req, res) {
     } catch (error) {
         return res.status(400).json({ success: false, message: error.message });
     }
-    return res.json({ success: true, user, token });
+    return res.json({ url,success: true, user, token });
 }
 
 export async function upload(req, res) {

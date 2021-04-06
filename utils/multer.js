@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid';
 var storage = Multer.diskStorage({
     destination: path.join(__dirname, '..', '/uploads'),
     fileFilter: function (req, file, cb) {
+    
         if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
             return cb(new Error('Only image files are allowed!'));
         }

@@ -32,6 +32,18 @@ export async function findPost(req, res) {
     return res.json({ post, success: true });
 }
 
+export async function searchPostByContent(req, res) {
+    let data = req.body;
+    const content = data.content;
+    let posts;
+    try {
+        posts = await postService.searchPostByContent(content)
+    } catch (error) {
+        return res.status(400).json({ success: false, message: error.message });
+    }
+    return res.json({ posts, success: true });
+}
+
 export async function findPostsByClass(req, res) {
     let data = req.body;
     const classs = data.class;

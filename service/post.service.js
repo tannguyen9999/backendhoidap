@@ -62,3 +62,11 @@ export async function findAllPostToSiteMap(limit, offset) {
         .sort({ createdAt: -1 });
     return posts;
 }
+
+export async function searchPostByContent(data) {
+    let posts = await Post.find({
+        content: { $regex: `.*${data}.*` },
+    })
+    .lean();
+    return posts;
+}

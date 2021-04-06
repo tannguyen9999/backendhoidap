@@ -22,8 +22,6 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cors());
 app.use('/api',route);
-app.use('/api/auth/updateAvatar', express.static('uploads'));
-app.use('/api/auth/upload', express.static('uploads'));
 
 
 

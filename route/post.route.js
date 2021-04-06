@@ -41,7 +41,11 @@ router.post(
     syncMiddleware(postEndpoint.findPostsByOption)
 );
 
-
+router.post(
+    '/search/',
+    syncMiddleware(validatorBody(postValidation.getSearchSchema)),
+    syncMiddleware(postEndpoint.searchPostByContent)
+);
 router.get(
     '/class',
     syncMiddleware(validatorBody(postValidation.getDataSByClasschema)),

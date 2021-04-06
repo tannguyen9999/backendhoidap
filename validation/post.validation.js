@@ -27,11 +27,14 @@ const getDataSchema = Joi.object().keys({
     offset: Joi.string().strip(),
     limit: Joi.string().strip(),
 });
-
+const getSearchSchema = Joi.object().keys({
+    content: Joi.string().strip(),
+});
 
 module.exports = {
     postDataSchema,
     getDataSByClasschema,
     getDataSchema,
-    getDataSByOptionchema
+    getDataSByOptionchema,
+    getSearchSchema
 }; 

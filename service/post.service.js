@@ -67,6 +67,7 @@ export async function searchPostByContent(data) {
     let posts = await Post.find({
         content: { $regex: `.*${data}.*` },
     })
-    .lean();
+    .lean()
+    .populate('userId');
     return posts;
 }

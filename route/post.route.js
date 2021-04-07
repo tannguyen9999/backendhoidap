@@ -56,6 +56,11 @@ router.get(
     syncMiddleware(postEndpoint.findPost)
 );
 
+router.get(
+    '/crawl/:postId/',
+    syncMiddleware(postEndpoint.crawlData)
+);
+
 
 
 

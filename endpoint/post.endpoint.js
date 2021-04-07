@@ -1,5 +1,11 @@
 
 import * as postService from '../service/post.service'
+import * as commentService from '../service/comment.service'
+
+import contentSlideBar from '../utils/CONSTANT/contentSlideBar'
+import { response } from 'express';
+const axios = require('axios')
+
 
 
 
@@ -156,4 +162,78 @@ export async function findPostsByOption(req, res) {
         return res.status(400).json({ success: false, message: error.message });
     }
     return res.json({ posts, success: true,limit,offset });
+}
+
+export async function crawlData(req, res) {
+    let {
+        postId
+    } = req.params;
+    const url = "https://api.hoidap247.com/question/detail"
+    let ress
+    try {
+        const { data } = await axios({
+          method: 'post',
+          url: url,
+          data: {
+            question_id: postId
+          }
+        });
+        if(data.data == null){
+        return res.status(400).json({ success: false });
+
+        }
+       ress = data
+       const content = data.data.content;
+        let img ="";
+        const comments = data.data.answers;
+        const classs = data.data.grade_id;
+        const subjectId = data.data.subject_id
+        let subject ;
+        let cmrv = [] ;
+        let post;
+
+        try {
+            if(
+                data.data.attachments[0] !== undefined
+            ){
+                img = data.data.attachments[0].large_url
+            }
+            
+            subject = contentSlideBar[subjectId].text
+            const dataSend = {
+                class: classs,
+                subject: subject,
+                content: content,
+                picture: img,
+            }
+            dataSend.userId = '60684596085d6e0015299afb'
+            post =  await postService.createFromData(dataSend)
+            const postUID = post._id;
+            comments.map((item,i)=>{
+                cmrv[i] = {
+                    contentComment:item.content,
+                    postId:postUID,
+                    userCommentId:'60684596085d6e0015299afb'
+                }
+            })
+            const apiCmts = cmrv.map((item)=>{
+                return commentService.createFromData(item)
+            })
+
+            const reponseApiCmts = await Promise.all(apiCmts)
+            
+
+            
+            
+        } catch (error) {
+            return res.status(400).json({ success: false,message: error.message });
+        }
+
+      
+      } catch (err) {
+        return res.status(400).json({ success: false });
+      }
+    
+   
+    return res.json({ ress, success: true });
 }
